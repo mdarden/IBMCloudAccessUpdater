@@ -6,10 +6,12 @@ Add these to your environment:
 # export IAM_IDENTITY_URL=https://iam.cloud.ibm.com
 # export IAM_IDENTITY_AUTHTYPE=iam
 # export IAM_IDENTITY_APIKEY=<YOUR API KEY>
+# export export IAM_ACCESS_GROUPS_APIKEY=<YOUR API_KEY>
+
 """
-import requests
+# import requests
 # import json
-import csv
+# import csv
 # from ibm_platform_services import IamIdentityV1
 import ibm_platform_services as ips
 
@@ -21,6 +23,7 @@ def main():
     # api_key_list = service_client.list_api_keys(account_id=account_id, iam_id=iam_id, include_history=True).get_result()
     # print(json.dumps(api_key_list, indent=2))
 
+    # See https://cloud.ibm.com/apidocs/iam-access-groups for usage details
     iam_access_groups_service = ips.IamAccessGroupsV2.new_instance()
     test_group_id = 'AccessGroupId-0528089c-daed-480f-ab5a-07192140e22d'
     iam_id = 'IBMid-310002GB1S'
