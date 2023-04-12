@@ -1,6 +1,15 @@
 '''
 This set of endpoints adds and removes a user from a user group.
+
+This script updates access on IBM Cloud using the IAM API
 See https://cloud.ibm.com/apidocs/iam-access-groups for usage detail.
+
+IAM specifies the names of the environment variables used by the SDK.
+Add these to your environment:
+# export IAM_IDENTITY_URL=https://iam.cloud.ibm.com
+# export IAM_IDENTITY_AUTHTYPE=iam
+# export IAM_IDENTITY_APIKEY=<YOUR API KEY>
+# export export IAM_ACCESS_GROUPS_APIKEY=<YOUR API_KEY>
 '''
 from flask import Flask, request, jsonify
 import ibm_platform_services as ips

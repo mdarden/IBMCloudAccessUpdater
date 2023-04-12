@@ -30,15 +30,15 @@ USER $USERNAME
 WORKDIR /home/$USERNAME
 
 # Install mamba
-# RUN conda install -y mamba -c conda-forge
+RUN conda install -y mamba -c conda-forge
 
 ADD ./environment.yml .
-# RUN mamba env update --file ./environment.yml &&\
-#     conda clean -tipy
+RUN mamba env update --file ./environment.yml &&\
+    conda clean -tipy
 # RUN /bin/bash -c "conda env create -f environment.yml"
 # RUN /bin/bash -c "conda clean -tipy"
-RUN conda env update --file ./environment.yml &&\
-    conda clean -tipy
+# RUN conda env update --file ./environment.yml &&\
+#     conda clean -tipy
 
 # For interactive shell
 RUN conda init bash
