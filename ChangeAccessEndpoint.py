@@ -10,7 +10,12 @@ Add these to your environment:
 # export IAM_IDENTITY_AUTHTYPE=iam
 # export IAM_IDENTITY_APIKEY=<YOUR API KEY>
 # export export IAM_ACCESS_GROUPS_APIKEY=<YOUR API_KEY>
+
+Also set these env variables
+ACCESS_GROUP_ID=<YOUR ACCESS GROUP ID>
+TEST_USER_IAM_ID=<IAM ID OF YOUR TEST USER>
 '''
+import os
 from flask import Flask, request, jsonify
 import ibm_platform_services as ips
 
@@ -23,8 +28,8 @@ def hello():
 @app.route('/remove', methods=["POST"])
 def remove_access():
     iam_access_groups_service = ips.IamAccessGroupsV2.new_instance()
-    test_group_id = 'AccessGroupId-0528089c-daed-480f-ab5a-07192140e22d'
-    test_iam_id = 'IBMid-310002GB1S'
+    test_group_id = os.getenv('ACCESS_GROUP_ID')
+    test_iam_id = os.getenv('TEST_USER_IAM_ID')
     remove_response = iam_access_groups_service.remove_member_from_access_group(
         access_group_id=test_group_id,
         iam_id=test_iam_id
@@ -34,8 +39,8 @@ def remove_access():
 # @app.route('/add', methods=["POST"])
 # def add_access():
 #     iam_access_groups_service = ips.IamAccessGroupsV2.new_instance()
-#     test_group_id = 'AccessGroupId-0528089c-daed-480f-ab5a-07192140e22d'
-#     test_iam_id = 'IBMid-310002GB1S'
+#     test_group_id = os.getenv('ACCESS_GROUP_ID')
+#     test_iam_id = os.getenv('TEST_USER_IAM_ID')
 #     members = [(test_iam_id, 'user')]
 
 #     add_response = iam_access_groups_service.add_members_to_access_group(

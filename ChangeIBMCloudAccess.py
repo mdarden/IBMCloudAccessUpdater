@@ -1,5 +1,6 @@
 """
 This script updates access on IBM Cloud using the IAM API
+See https://cloud.ibm.com/apidocs/iam-access-groups for usage details
 
 IAM specifies the names of the environment variables used by the SDK.
 Add these to your environment:
@@ -8,25 +9,22 @@ Add these to your environment:
 # export IAM_IDENTITY_APIKEY=<YOUR API KEY>
 # export export IAM_ACCESS_GROUPS_APIKEY=<YOUR API_KEY>
 
+Also set these env variables
+ACCESS_GROUP_ID=<YOUR ACCESS GROUP ID>
+TEST_USER_IAM_ID=<IAM ID OF YOUR TEST USER>
+
 """
 # import requests
 # import json
 # import csv
 # from ibm_platform_services import IamIdentityV1
+import os
 import ibm_platform_services as ips
 
 def main():
-    # service_client = ips.IamIdentityV1.new_instance()
-
-    # account_id = 'ebf33ad3ea2e538ed628a3697b5e1d30'
-    # iam_id = 'IBMid-270007NXK2'
-    # api_key_list = service_client.list_api_keys(account_id=account_id, iam_id=iam_id, include_history=True).get_result()
-    # print(json.dumps(api_key_list, indent=2))
-
-    # See https://cloud.ibm.com/apidocs/iam-access-groups for usage details
     iam_access_groups_service = ips.IamAccessGroupsV2.new_instance()
-    test_group_id = 'AccessGroupId-0528089c-daed-480f-ab5a-07192140e22d'
-    iam_id = 'IBMid-310002GB1S'
+    test_group_id = os.getenv('ACCESS_GROUP_ID')
+    iam_id = os.getenv('TEST_USER_IAM_ID')
     response = iam_access_groups_service.remove_member_from_access_group(
         access_group_id=test_group_id,
         iam_id=iam_id
